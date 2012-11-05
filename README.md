@@ -4,7 +4,8 @@ TDUtils
 Many of these utilities come from StackOverflow or other sources. You can always take a look at original URL.
 
 
-* 1) + (NSDictionary *)propertiesForClass:(Class)cls; *
+1) + (NSDictionary *)propertiesForClass:(Class)cls;
+
  Answer from http://stackoverflow.com/questions/754824/get-an-object-attributes-list-in-objective-c/13000074#13000074
  
  Return dictionary of property name and type from a class.
@@ -33,6 +34,6 @@ Many of these utilities come from StackOverflow or other sources. You can always
     }
 
 
-* 2) + (BOOL) validateEmail:(NSString*)email; *
+2) + (BOOL) validateEmail:(NSString*)email;
 
 Validate email using Regex. Answer from http://stackoverflow.com/questions/800123/best-practices-for-validating-email-address-in-objective-c-on-ios-2-0
