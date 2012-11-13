@@ -33,6 +33,18 @@
  */
 + (NSDictionary *)propertiesForClass:(Class)cls;
 
+
+/** Convert a dict to an object with predefined class. Useful for translate server json to object.
+ */
++ (id) objectWithClass:(Class)cls fromDictionary:(NSDictionary*)dict;
+
+
+/** Convert an array of dict to array of object with predefined class. 
+ Useful for translate server json to object.
+ */
++ (NSArray*) arrayOfClass:(Class)cls fromArrayOfDictionary:(NSArray*)array;
+
+
 /** Validate email using Regex
  Answer from http://stackoverflow.com/questions/800123/best-practices-for-validating-email-address-in-objective-c-on-ios-2-0
  */

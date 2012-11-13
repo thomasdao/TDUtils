@@ -61,6 +61,58 @@ static const char *getPropertyType(objc_property_t property) {
     return [NSDictionary dictionaryWithDictionary:results];
 }
 
+
++ (id)objectWithClass:(Class)cls fromDictionary:(NSDictionary *)dict {
+    id obj = [[[cls alloc] init] autorelease];
+    
+    NSDictionary* properties = [TDUtils propertiesForClass:cls];
+    
+    // Since key of object is a string, we need to check the dict contains
+    // string as key. If it contains non-string key, the key will be skipped.
+    // If key is not inside the object properties, it's skipped too.
+    // Otherwise assign value of key from dict to obj
+    for (id key in dict) {
+        // Skip for non-string key
+        if ([key isKindOfClass:[NSString class]] == NO) {
+            NSLog(@"TDUtils: key must be NSString. Received key %@", key);
+            break;
+        }
+        
+        // If key is not inside the object properties, skip it
+        id value = [properties objectForKey:key];
+        if (value == nil) {
+            NSLog(@"TDUtils: key %@ is not existed in class %@", key, NSStringFromClass(cls));
+            break;
+        }
+        
+        // For string-key
+        [obj setValue:value forKey:key];
+    }
+    
+    return obj;
+}
+
++(NSArray *)arrayOfClass:(Class)cls fromArrayOfDictionary:(NSArray *)array {
+    NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithCapacity:[array count]];
+    
+    for (id item in array) {
+        // The item must be a dictionary. Otherwise, skip it
+        if ([item isKindOfClass:[NSDictionary class]] == NO) {
+            NSLog(@"TDUtils: item inside array must be NSDictionary object");
+            break;
+        }
+        
+        // Convert item dictionary to object with predefined class
+        id obj = [TDUtils objectWithClass:cls fromDictionary:item];
+        [mutableArray addObject:obj];
+    }
+    
+    NSArray *arrWithClass = [NSArray arrayWithArray:mutableArray];
+    [mutableArray release];
+    return arrWithClass;
+}
+
+
 #pragma mark - Validate Emails
 + (BOOL)validateEmail:(NSString *)email {
     NSString *emailRegex =

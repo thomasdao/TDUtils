@@ -34,6 +34,16 @@ Many of these utilities come from StackOverflow or other sources. You can always
     }
 
 
-### 2) + (BOOL) validateEmail:(NSString*)email;
+### 2) + (id) objectWithClass:(Class)cls fromDictionary:(NSDictionary*)dict;
+
+Convert a dict to an object with predefined class. Useful for translate server json to object.
+
+
+### 3) + (NSArray*) arrayOfClass:(Class)cls fromArrayOfDictionary:(NSArray*)array;
+
+Convert an array of dict to array of object with predefined class. Useful for translate server json to object.
+
+
+### 4) + (BOOL) validateEmail:(NSString*)email;
 
 Validate email using Regex. Answer from http://stackoverflow.com/questions/800123/best-practices-for-validating-email-address-in-objective-c-on-ios-2-0
